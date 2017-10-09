@@ -2,7 +2,8 @@
 include('php-riot-api.php');
 include('FileSystemCache.php');
 $_POST = json_decode(file_get_contents('php://input'), true);
-$server = htmlspecialchars($_POST["server"]);
+// $server = htmlspecialchars($_POST["server"]);
+$server = 'euw1'
 //testing classes
 //using double quotes seems to make all names work (see issue: https://github.com/kevinohashi/php-riot-api/issues/33)
 $api = new riotapi($server, new FileSystemCache('cache/'));
@@ -30,7 +31,8 @@ $api = new riotapi($server, new FileSystemCache('cache/'));
 // $r = $api->getChallenger();
 // $r = $api->getMaster();
 $_POST = json_decode(file_get_contents('php://input'), true);
-$name = htmlspecialchars($_POST["name"]);
+// $name = htmlspecialchars($_POST["name"]);
+$name = 'GoSteal'
 $r = $api->getSummonerByName($name);
 print_r($r)
 // try {
