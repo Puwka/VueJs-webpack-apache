@@ -1,8 +1,11 @@
 ALPHA v 0.0.0 http://loltracker.tmweb.ru/ NO INTERFACE
+
 Вводите никнейм, выбирайте сервер, нажимайте "GO" и в консоли можно увидеть execute реквестов с полученными данными.
 
-EX: 
+EX:
+
 Summoner Name: Dobry vecher, server: EUW;
+
 Summoner Name: Dyrus,        server: NA;
 
 ## Build Setup
