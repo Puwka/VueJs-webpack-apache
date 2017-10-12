@@ -1,4 +1,9 @@
-Локально проект работать не будет, разве что можно посмотреть внешний вид. Когда все будет сделано - добавлю сюда ссылку с проектом! Спасибо.
+ALPHA v 0.0.0 http://loltracker.tmweb.ru/ NO INTERFACE
+Вводите никнейм, выбирайте сервер, нажимайте "GO" и в консоли можно увидеть execute реквестов с полученными данными.
+
+EX: 
+Summoner Name: Dobry vecher, server: EUW;
+Summoner Name: Dyrus,        server: NA;
 
 ## Build Setup
 
