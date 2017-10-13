@@ -5,7 +5,7 @@
     <v-flex xs6 sm8>
       <v-form>
         <v-text-field label="Summoner Name" v-model="name" required></v-text-field>
-				{{ name }}, {{ summonerId }}<br> League: {{ tier }}<br> Division: {{ rank }}<br> League points: {{ lp }}
+				{{ name }}, {{ summonerId }}<br> League:  {{ tier }}<br> Division: {{ rank }}<br> League points: {{ lp }}
       </v-form>
     </v-flex>
     <v-flex xs3 sm2 lg1>
