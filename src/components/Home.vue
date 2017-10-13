@@ -5,7 +5,10 @@
     <v-flex xs6 sm8>
       <v-form>
         <v-text-field label="Summoner Name" v-model="name" required></v-text-field>
-				{{ name }}, {{ summonerId }} League:  {{ tier }} Division: {{ rank }} League points: {{ lp }}
+				{{ name }}, {{ summonerId }}
+				<br>League: {{ tier }}
+				<br>Division: {{ rank }}
+				<br>League points: {{ lp }}
       </v-form>
     </v-flex>
     <v-flex xs3 sm2 lg1>
@@ -41,10 +44,6 @@ export default {
           text: 'RU',
           value: 'ru'
         },
-				{
-          text: 'EUN',
-          value: 'eun1'
-        },
         {
           text: 'BR',
           value: 'br1'
@@ -58,6 +57,10 @@ export default {
           value: 'jp1'
         },
         {
+          text: 'EUN',
+          value: 'eun1'
+        },
+        {
           text: 'TR',
           value: 'tr1'
         },
@@ -68,7 +71,7 @@ export default {
         {
           text: 'LA2',
           value: 'la2'
-        }
+        },
       ]
     }
 	},
