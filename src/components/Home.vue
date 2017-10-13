@@ -41,6 +41,10 @@ export default {
           text: 'RU',
           value: 'ru'
         },
+				{
+          text: 'EUN',
+          value: 'eun1'
+        },
         {
           text: 'BR',
           value: 'br1'
@@ -52,10 +56,6 @@ export default {
         {
           text: 'JP',
           value: 'jp1'
-        },
-        {
-          text: 'EUN',
-          value: 'eun1'
         },
         {
           text: 'TR',
