@@ -75,7 +75,7 @@ export default {
             .catch(e => {
               console.log(e)
             })
-        }, 500)
+        }, 1500)
       }
     }
   }
