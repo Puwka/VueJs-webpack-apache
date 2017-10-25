@@ -126,8 +126,8 @@ export default {
     getCurrentGame: function () {
       this.doSmth()
       axios.post('../php/current.php', {
-        id: self.summonerId,
-        server: self.server
+        id: this.summonerId,
+        server: this.server
       })
         .then(function (response) {
           console.log(response.data)
