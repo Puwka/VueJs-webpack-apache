@@ -5,7 +5,6 @@
     <v-flex xs6 sm8>
       <v-form>
         <v-text-field label="Summoner Name" v-model="name" required></v-text-field>
-        {{ name }}, {{ summonerId }}
         <br>League: {{ tier }}
         <br>Division: {{ rank }}
         <br>League points: {{ lp }}
@@ -32,7 +31,7 @@ export default {
       summonerId: '',
       lp: '',
       rank: '',
-			wr: '',
+      wr: '',
       tier: '',
       items: [{
           text: 'EUW',
@@ -80,55 +79,52 @@ export default {
         },
       ]
     }
-	},
-    methods: {
-      doSmth: function() {
-        console.log('hi')
-        axios.post('../php/testing.php', {
-            name: this.name,
-            server: this.server
+  },
+  methods: {
+    doSmth: function() {
+      console.log('hi')
+      axios.post('../php/testing.php', {
+          name: this.name,
+          server: this.server
+        })
+        .then(response => {
+          console.log(response.data.name)
+          this.summonerId = response.data.id
+        })
+        .catch(e => {
+          console.log(e)
+        })
+    },
+    getLeaguePos: function() {
+      this.doSmth()
+      var self = this
+      this.lp = 'Loading...'
+      this.rank = 'Loading...'
+      this.tier = 'Loading...'
+			this.wr = 'Loading...'
+      setTimeout(function() {
+        axios.post('../php/leaguePos.php', {
+            id: self.summonerId,
+            server: self.server
           })
           .then(response => {
-            console.log(response.data.name)
-            this.summonerId = response.data.id
+            console.log(response.data)
+            for (i = 0; i < response.data.length; i++) {
+              if (response.data[i].queueType == 'RANKED_SOLO_5x5') {
+                self.lp = response.data[i].leaguePoints
+                self.rank = response.data[i].rank
+                self.tier = response.data[i].tier
+                self.wr = Math.round((response.data[i].wins / (response.data[1].wins + response.data[1].losses)) * 100)
+              }
+            }
           })
           .catch(e => {
             console.log(e)
           })
-      },
-      getLeaguePos: function() {
-        this.doSmth()
-        var self = this
-        this.lp = 'Loading...'
-        this.rank = 'Loading...'
-        this.tier = 'Loading...'
-        setTimeout(function() {
-          axios.post('../php/leaguePos.php', {
-              id: self.summonerId,
-              server: self.server
-            })
-            .then(response => {
-              console.log(response.data)
-							if (response.data.length > 1) {
-								self.lp = response.data[1].leaguePoints
-	              self.rank = response.data[1].rank
-	              self.tier = response.data[1].tier
-								self.wr = (response.data[1].wins / (response.data[1].wins + response.data[1].losses)) * 100
-							} else {
-              self.lp = response.data[0].leaguePoints
-              self.rank = response.data[0].rank
-              self.tier = response.data[0].tier
-							self.wr = (response.data[0].wins / (response.data[0].wins + response.data[0].losses)) * 100
-						}
-            })
-            .catch(e => {
-              console.log(e)
-            })
-        }, 500)
-      }
+      }, 500)
     }
   }
-
+}
 </script>
 <!-- <input type="text" v-model="name">
 <select v-model="server">
