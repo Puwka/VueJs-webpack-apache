@@ -9,6 +9,7 @@
         <br>League: {{ tier }}
         <br>Division: {{ rank }}
         <br>League points: {{ lp }}
+				<br>Win Rate: {{ wr }}
       </v-form>
     </v-flex>
     <v-flex xs3 sm2 lg1>
@@ -31,6 +32,7 @@ export default {
       summonerId: '',
       lp: '',
       rank: '',
+			wr: '',
       tier: '',
       items: [{
           text: 'EUW',
@@ -47,6 +49,10 @@ export default {
         {
           text: 'BR',
           value: 'br1'
+        },
+        {
+          text: 'KR',
+          value: 'kr1'
         },
         {
           text: 'OC',
@@ -103,9 +109,17 @@ export default {
             })
             .then(response => {
               console.log(response.data)
+							if (response.data.length > 1) {
+								self.lp = response.data[1].leaguePoints
+	              self.rank = response.data[1].rank
+	              self.tier = response.data[1].tier
+								self.wr = (response.data[1].wins / (response.data[1].wins + response.data[1].losses)) * 100
+							} else {
               self.lp = response.data[0].leaguePoints
               self.rank = response.data[0].rank
               self.tier = response.data[0].tier
+							self.wr = (response.data[0].wins / (response.data[0].wins + response.data[0].losses)) * 100
+						}
             })
             .catch(e => {
               console.log(e)
