@@ -1,11 +1,11 @@
 <?php
 include('php-riot-api.php');
-
+include('FileSystemCache.php');
 $_POST = json_decode(file_get_contents('php://input'), true);
 $server = htmlspecialchars($_POST["server"]);
 //testing classes
 //using double quotes seems to make all names work (see issue: https://github.com/kevinohashi/php-riot-api/issues/33)
-$api = new riotapi($server);
+$api = new riotapi($server, new FileSystemCache('cache/'));
 
 // $r = $api->getChampion();
 // $r = $api->getChampion(true);
