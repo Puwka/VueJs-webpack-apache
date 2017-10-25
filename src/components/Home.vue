@@ -126,17 +126,3 @@ export default {
   }
 }
 </script>
-<!-- <input type="text" v-model="name">
-<select v-model="server">
-	<option value="euw1">EUW</option>
-	<option value="na1">NA</option>
-	<option value="ru">RU</option>
-</select>
-<p>Server: {{ server }}</p>
-<p>Name: {{ name }}</p>
-<p>League: {{ tier }}</p>
-<p>Division: {{ rank }}</p>
-<p>League Points: {{ lp }}</p>
-<p>ID: {{ summonerId }}</p>
-
-<button @click="getLeaguePos()">LeaguePos</button> -->
