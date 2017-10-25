@@ -37,16 +37,7 @@ export default {
       sideNav: false,
       name: '',
       server: '',
-      menuItems: [{
-          icon: 'supervisor_account',
-          title: 'Cool list',
-          link: '/meetups'
-        },
-        {
-          icon: 'room',
-          title: 'Stay cool',
-          link: '/meetup/new'
-        },
+      menuItems: [
         {
           icon: 'person',
           title: 'Profile',

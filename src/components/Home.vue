@@ -15,7 +15,7 @@
       <v-select v-bind:items="items" v-model="server" label="Server" single-line bottom></v-select>
     </v-flex>
 		<v-flex xs3 sm2 lg1>
-			<v-btn raised large class="primary" dark @click.native="getLeaguePos()">GO!</v-btn>
+			<v-btn raised large class="primary" dark @click.native="getLeaguePos(), getCurrentGame()">GO!</v-btn>
 		</v-flex>
 		<v-spacer></v-spacer>
   </v-layout>
@@ -108,7 +108,6 @@ export default {
             server: self.server
           })
           .then(response => {
-            console.log(response.data)
             for (var i = 0; i < response.data.length; i++) {
               if (response.data[i].queueType == 'RANKED_SOLO_5x5') {
                 self.lp = response.data[i].leaguePoints
@@ -122,21 +121,17 @@ export default {
             console.log(e)
           })
       }, 500)
-    }
+    },
+		getCurrentGame: function() {
+			this.doSmth()
+			axios.post('../php/current.php', { id: this.summoneId, server: this.server })
+			.then(function(response) {
+				console.log(response.data)
+			})
+			.catch(function(e) {
+				console.log(e)
+			})
+		}
   }
 }
 </script>
-<!-- <input type="text" v-model="name">
-<select v-model="server">
-	<option value="euw1">EUW</option>
-	<option value="na1">NA</option>
-	<option value="ru">RU</option>
-</select>
-<p>Server: {{ server }}</p>
-<p>Name: {{ name }}</p>
-<p>League: {{ tier }}</p>
-<p>Division: {{ rank }}</p>
-<p>League Points: {{ lp }}</p>
-<p>ID: {{ summonerId }}</p>
-
-<button @click="getLeaguePos()">LeaguePos</button> -->
