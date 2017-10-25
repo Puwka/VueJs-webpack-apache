@@ -109,12 +109,12 @@ export default {
           })
           .then(response => {
             console.log(response.data)
-            for (i = 0; i < response.data.length; i++) {
+            for (var i = 0; i < response.data.length; i++) {
               if (response.data[i].queueType == 'RANKED_SOLO_5x5') {
                 self.lp = response.data[i].leaguePoints
                 self.rank = response.data[i].rank
                 self.tier = response.data[i].tier
-                self.wr = Math.round((response.data[i].wins / (response.data[1].wins + response.data[1].losses)) * 100)
+                self.wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
               }
             }
           })
