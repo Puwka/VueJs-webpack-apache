@@ -122,7 +122,19 @@ export default {
             console.log(e)
           })
       }, 500)
-    }
+    },
+		getCurrerntGame: function() {
+			axios.post('../php/currrent.php', {
+				id: self.summonerId,
+				server: self.server
+			})
+			.then(function(rresponse) {
+				console.log(response.data)
+			})
+			.catch(function(e) {
+				console.log(e)
+			})
+		}
   }
 }
 </script>

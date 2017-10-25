@@ -9,6 +9,6 @@ $api = new riotapi($server, new FileSystemCache('cache/'));
 $_POST = json_decode(file_get_contents('php://input'), true);
 $id = htmlspecialchars($_POST["id"]);
 
-$r = $api->getLeague($id);
+$r = $api->getCurrentGame($id);
 print_r($r);
 ?>
