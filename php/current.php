@@ -4,7 +4,7 @@ include('FileSystemCache.php');
 
 $_POST = json_decode(file_get_contents('php://input'), true);
 $server = htmlspecialchars($_POST["server"]);
-$api = new riotapi($server, new FileSystemCache('cache/'));
+$api = new riotapi($server);
 
 $id = htmlspecialchars($_POST["id"]);
 

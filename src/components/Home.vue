@@ -101,7 +101,7 @@ export default {
       this.lp = 'Loading...'
       this.rank = 'Loading...'
       this.tier = 'Loading...'
-			this.wr = 'Loading...'
+      this.wr = 'Loading...'
       setTimeout(function() {
         axios.post('../php/leaguePos.php', {
             id: self.summonerId,
@@ -122,16 +122,19 @@ export default {
           })
       }, 500)
     },
-		getCurrentGame: function() {
-			this.doSmth()
-			axios.post('../php/current.php', { id: this.summoneId, server: this.server })
-			.then(function(response) {
-				console.log(response.data)
-			})
-			.catch(function(e) {
-				console.log(e)
-			})
-		}
+    getCurrentGame: function() {
+      this.doSmth()
+      axios.post('../php/current.php', {
+          id: this.summoneId,
+          server: this.server
+        })
+        .then(function(response) {
+          console.log(response.data)
+        })
+        .catch(function(e) {
+          console.log(e)
+        })
+    }
   }
 }
 </script>
