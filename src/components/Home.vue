@@ -15,7 +15,7 @@
       <v-select v-bind:items="items" v-model="server" label="Server" single-line bottom></v-select>
     </v-flex>
 		<v-flex xs3 sm2 lg1>
-			<v-btn raised large class="primary" dark @click.native="getLeaguePos()">GO!</v-btn>
+			<v-btn raised large class="primary" dark @click.native="getLeaguePos(), getCurrentGame()">GO!</v-btn>
 		</v-flex>
 		<v-spacer></v-spacer>
   </v-layout>
@@ -24,7 +24,7 @@
 <script>
 var axios = require('axios')
 export default {
-  data() {
+  data () {
     return {
       name: null,
       server: null,
@@ -34,59 +34,59 @@ export default {
       wr: '',
       tier: '',
       items: [{
-          text: 'EUW',
-          value: 'euw1'
-        },
-        {
-          text: 'NA',
-          value: 'na1'
-        },
-        {
-          text: 'RU',
-          value: 'ru'
-        },
-        {
-          text: 'BR',
-          value: 'br1'
-        },
-        {
-          text: 'KR',
-          value: 'kr1'
-        },
-        {
-          text: 'OC',
-          value: 'oc1'
-        },
-        {
-          text: 'JP',
-          value: 'jp1'
-        },
-        {
-          text: 'EUN',
-          value: 'eun1'
-        },
-        {
-          text: 'TR',
-          value: 'tr1'
-        },
-        {
-          text: 'LA1',
-          value: 'la1'
-        },
-        {
-          text: 'LA2',
-          value: 'la2'
-        },
+        text: 'EUW',
+        value: 'euw1'
+      },
+      {
+        text: 'NA',
+        value: 'na1'
+      },
+      {
+        text: 'RU',
+        value: 'ru'
+      },
+      {
+        text: 'BR',
+        value: 'br1'
+      },
+      {
+        text: 'KR',
+        value: 'kr1'
+      },
+      {
+        text: 'OC',
+        value: 'oc1'
+      },
+      {
+        text: 'JP',
+        value: 'jp1'
+      },
+      {
+        text: 'EUN',
+        value: 'eun1'
+      },
+      {
+        text: 'TR',
+        value: 'tr1'
+      },
+      {
+        text: 'LA1',
+        value: 'la1'
+      },
+      {
+        text: 'LA2',
+        value: 'la2'
+      }
       ]
     }
   },
   methods: {
-    doSmth: function() {
+    doSmth: function () {
       console.log('hi')
       axios.post('../php/testing.php', {
-          name: this.name,
-          server: this.server
-        })
+        name: this.name,
+        server: this.server
+      })
         .then(response => {
           console.log(response.data.name)
           this.summonerId = response.data.id
@@ -95,22 +95,22 @@ export default {
           console.log(e)
         })
     },
-    getLeaguePos: function() {
+    getLeaguePos: function () {
       this.doSmth()
       var self = this
       this.lp = 'Loading...'
       this.rank = 'Loading...'
       this.tier = 'Loading...'
-			this.wr = 'Loading...'
-      setTimeout(function() {
+      this.wr = 'Loading...'
+      setTimeout(function () {
         axios.post('../php/leaguePos.php', {
-            id: self.summonerId,
-            server: self.server
-          })
+          id: self.summonerId,
+          server: self.server
+        })
           .then(response => {
             console.log(response.data)
             for (var i = 0; i < response.data.length; i++) {
-              if (response.data[i].queueType == 'RANKED_SOLO_5x5') {
+              if (response.data[i].queueType === 'RANKED_SOLO_5x5') {
                 self.lp = response.data[i].leaguePoints
                 self.rank = response.data[i].rank
                 self.tier = response.data[i].tier
@@ -123,18 +123,18 @@ export default {
           })
       }, 500)
     },
-		getCurrerntGame: function() {
-			axios.post('../php/currrent.php', {
-				id: self.summonerId,
-				server: self.server
-			})
-			.then(function(rresponse) {
-				console.log(response.data)
-			})
-			.catch(function(e) {
-				console.log(e)
-			})
-		}
+    getCurrentGame: function () {
+      axios.post('../php/currrent.php', {
+        id: self.summonerId,
+        server: self.server
+      })
+        .then(function (response) {
+          console.log(response.data)
+        })
+        .catch(function (e) {
+          console.log(e)
+        })
+    }
   }
 }
 </script>
