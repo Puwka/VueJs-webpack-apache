@@ -124,7 +124,7 @@ export default {
       }, 500)
     },
     getCurrentGame: function () {
-      axios.post('../php/currrent.php', {
+      axios.post('../php/current.php', {
         id: self.summonerId,
         server: self.server
       })
