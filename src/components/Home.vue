@@ -91,7 +91,7 @@ export default {
         server: this.server
       })
         .then(function (response) {
-          console.log(response.data.name)
+          console.log(response.data)
           this.summonerId = response.data.id
           axios.post('../php/leaguePos.php', {
             id: this.summonerId,
