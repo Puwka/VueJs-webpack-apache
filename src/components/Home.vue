@@ -86,14 +86,15 @@ export default {
       this.rank = 'Loading...'
       this.tier = 'Loading...'
       this.wr = 'Loading...'
+      var self = this
       axios.post('../php/testing.php', {
         name: this.name,
         server: this.server
       })
         .then(function (response) {
           console.log(response.data)
-          console.log(this.summonerId)
-          this.summonerId = response.data.id
+          console.log(self.summonerId)
+          self.summonerId = response.data.id
           console.log(this.summonerId)
           axios.post('../php/leaguePos.php', {
             id: this.summonerId,
@@ -114,7 +115,6 @@ export default {
               console.log(e)
             })
         })
-
         .catch(e => {
           console.log(e)
         })
