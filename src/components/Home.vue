@@ -5,7 +5,7 @@
     <v-flex xs6 sm8>
       <v-form>
         <v-text-field label="Summoner Name" v-model="name" required></v-text-field>
-				<br>{{ summonerId }}
+				<br>{{ gameIds }}
         <br>League: {{ tier }}
         <br>Division: {{ rank }}
         <br>League points: {{ lp }}
@@ -34,6 +34,8 @@ export default {
       rank: '',
       wr: '',
       tier: '',
+      gameIds: [],
+      summoners: [],
       items: [{
         text: 'EUW',
         value: 'euw1'
@@ -119,16 +121,30 @@ export default {
         })
     },
     getCurrentGame: function () {
-      axios.post('../php/current.php', {
-        id: this.summonerId,
+      var self = this
+      axios.post('../php/testing/php', {
+        name: this.name,
         server: this.server
       })
-        .then(function (response) {
-          console.log(response.data)
+      .then(function (response) {
+        self.summonerId = response.data.id
+        axios.post('../php/current.php', {
+          id: self.summonerId,
+          server: self.server
         })
-        .catch(function (e) {
-          console.log(e)
-        })
+          .then(function (response) {
+            console.log(response.data)
+            for (var i = 0; i < response.participants.length; i++) {
+              self.gameIds.push(response.participants[i].summonerId)
+            }
+          })
+          .catch(function (e) {
+            console.log(e)
+          })
+      })
+      .catch(function (e) {
+        console.log(e)
+      })
     }
   }
 }
