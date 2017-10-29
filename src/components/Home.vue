@@ -5,7 +5,8 @@
     <v-flex xs6 sm8>
       <v-form>
         <v-text-field label="Summoner Name" v-model="name" required></v-text-field>
-				<div v-for="summoner in summoners">{{summoner}}</div>
+				<div v-for="summoner in blueTeam">{{summoner}}</div>
+				<div v-for="summoner in redTeam">{{summoner}}</div>
         <br>League: {{ tier }}
         <br>Division: {{ rank }}
         <br>League points: {{ lp }}
@@ -35,9 +36,10 @@ export default {
       wr: '',
       tier: '',
       gameIds: [],
-      summoners: [
+      blueTeam: [
         {
           name: '',
+          champ: '',
           lp: '',
           rank: '',
           tier: '',
@@ -45,6 +47,7 @@ export default {
         },
         {
           name: '',
+          champ: '',
           lp: '',
           rank: '',
           tier: '',
@@ -52,6 +55,7 @@ export default {
         },
         {
           name: '',
+          champ: '',
           lp: '',
           rank: '',
           tier: '',
@@ -59,6 +63,7 @@ export default {
         },
         {
           name: '',
+          champ: '',
           lp: '',
           rank: '',
           tier: '',
@@ -66,6 +71,17 @@ export default {
         },
         {
           name: '',
+          champ: '',
+          lp: '',
+          rank: '',
+          tier: '',
+          wr: ''
+        }
+      ],
+      redTeam: [
+        {
+          name: '',
+          champ: '',
           lp: '',
           rank: '',
           tier: '',
@@ -73,6 +89,7 @@ export default {
         },
         {
           name: '',
+          champ: '',
           lp: '',
           rank: '',
           tier: '',
@@ -80,6 +97,7 @@ export default {
         },
         {
           name: '',
+          champ: '',
           lp: '',
           rank: '',
           tier: '',
@@ -87,6 +105,7 @@ export default {
         },
         {
           name: '',
+          champ: '',
           lp: '',
           rank: '',
           tier: '',
@@ -94,13 +113,7 @@ export default {
         },
         {
           name: '',
-          lp: '',
-          rank: '',
-          tier: '',
-          wr: ''
-        },
-        {
-          name: '',
+          champ: '',
           lp: '',
           rank: '',
           tier: '',
@@ -191,12 +204,19 @@ export default {
     },
     getCurrentGame: function () {
       var self = this
-      for (var i = 0; i < this.summoners.length; i++) {
-        this.summoners[i].name = 'Loading..'
-        this.summoners[i].lp = 'Loading..'
-        this.summoners[i].rank = 'Loading..'
-        this.summoners[i].tier = 'Loading..'
-        this.summoners[i].wr = 'Loading..'
+      for (var i = 0; i < 5; i++) {
+        this.blueTeam[i].name = 'Loading..'
+        this.blueTeam[i].lp = 'Loading..'
+        this.blueTeam[i].rank = 'Loading..'
+        this.blueTeam[i].tier = 'Loading..'
+        this.blueTeam[i].wr = 'Loading..'
+        this.blueTeam[i].champ = 'Loading..'
+        this.redTeam[i].name = 'Loading..'
+        this.redTeam[i].lp = 'Loading..'
+        this.redTeam[i].rank = 'Loading..'
+        this.redTeam[i].tier = 'Loading..'
+        this.redTeam[i].wr = 'Loading..'
+        this.redTeam[i].champ = 'Loading..'
       }
       axios.post('../php/testing.php', {
         name: this.name,
@@ -212,6 +232,12 @@ export default {
             console.log(response.data)
             for (var i = 0; i < response.data.participants.length; i++) {
               self.gameIds.push(response.data.participants[i].summonerId)
+              for (var j = 0; j < 5; j++) {
+                self.blueTeam[j].champ = response.data.participants[j].championId
+              }
+              for (var z = 0; z < 5; z++) {
+                self.redTeam[z].champ = response.data.participants[z + 5].championId
+              }
             }
             self.getGameStats()
           })
@@ -232,11 +258,11 @@ export default {
       .then(function (response) {
         for (var i = 0; i < response.data.length; i++) {
           if (response.data[i].queueType === 'RANKED_SOLO_5x5') {
-            self.summoners[0].name = response.data[i].playerOrTeamName
-            self.summoners[0].lp = response.data[i].leaguePoints
-            self.summoners[0].rank = response.data[i].rank
-            self.summoners[0].tier = response.data[i].tier
-            self.summoners[0].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
+            self.blueTEam[0].name = response.data[i].playerOrTeamName
+            self.blueTEam[0].lp = response.data[i].leaguePoints
+            self.blueTEam[0].rank = response.data[i].rank
+            self.blueTEam[0].tier = response.data[i].tier
+            self.blueTEam[0].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100) + '%'
           }
         }
       })
@@ -250,11 +276,11 @@ export default {
       .then(function (response) {
         for (var i = 0; i < response.data.length; i++) {
           if (response.data[i].queueType === 'RANKED_SOLO_5x5') {
-            self.summoners[1].name = response.data[i].playerOrTeamName
-            self.summoners[1].lp = response.data[i].leaguePoints
-            self.summoners[1].rank = response.data[i].rank
-            self.summoners[1].tier = response.data[i].tier
-            self.summoners[1].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
+            self.blueTeam[1].name = response.data[i].playerOrTeamName
+            self.blueTeam[1].lp = response.data[i].leaguePoints
+            self.blueTeam[1].rank = response.data[i].rank
+            self.blueTeam[1].tier = response.data[i].tier
+            self.blueTeam[1].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100) + '%'
           }
         }
       })
@@ -268,11 +294,11 @@ export default {
       .then(function (response) {
         for (var i = 0; i < response.data.length; i++) {
           if (response.data[i].queueType === 'RANKED_SOLO_5x5') {
-            self.summoners[2].name = response.data[i].playerOrTeamName
-            self.summoners[2].lp = response.data[i].leaguePoints
-            self.summoners[2].rank = response.data[i].rank
-            self.summoners[2].tier = response.data[i].tier
-            self.summoners[2].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
+            self.blueTeam[2].name = response.data[i].playerOrTeamName
+            self.blueTeam[2].lp = response.data[i].leaguePoints
+            self.blueTeam[2].rank = response.data[i].rank
+            self.blueTeam[2].tier = response.data[i].tier
+            self.blueTeam[2].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100) + '%'
           }
         }
       })
@@ -286,11 +312,11 @@ export default {
       .then(function (response) {
         for (var i = 0; i < response.data.length; i++) {
           if (response.data[i].queueType === 'RANKED_SOLO_5x5') {
-            self.summoners[3].name = response.data[i].playerOrTeamName
-            self.summoners[3].lp = response.data[i].leaguePoints
-            self.summoners[3].rank = response.data[i].rank
-            self.summoners[3].tier = response.data[i].tier
-            self.summoners[3].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
+            self.blueTeam[3].name = response.data[i].playerOrTeamName
+            self.blueTeam[3].lp = response.data[i].leaguePoints
+            self.blueTeam[3].rank = response.data[i].rank
+            self.blueTeam[3].tier = response.data[i].tier
+            self.blueTeam[3].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100) + '%'
           }
         }
       })
@@ -304,11 +330,11 @@ export default {
       .then(function (response) {
         for (var i = 0; i < response.data.length; i++) {
           if (response.data[i].queueType === 'RANKED_SOLO_5x5') {
-            self.summoners[4].name = response.data[i].playerOrTeamName
-            self.summoners[4].lp = response.data[i].leaguePoints
-            self.summoners[4].rank = response.data[i].rank
-            self.summoners[4].tier = response.data[i].tier
-            self.summoners[4].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
+            self.blueTeam[4].name = response.data[i].playerOrTeamName
+            self.blueTeam[4].lp = response.data[i].leaguePoints
+            self.blueTeam[4].rank = response.data[i].rank
+            self.blueTeam[4].tier = response.data[i].tier
+            self.blueTeam[4].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100) + '%'
           }
         }
       })
@@ -322,11 +348,11 @@ export default {
       .then(function (response) {
         for (var i = 0; i < response.data.length; i++) {
           if (response.data[i].queueType === 'RANKED_SOLO_5x5') {
-            self.summoners[5].name = response.data[i].playerOrTeamName
-            self.summoners[5].lp = response.data[i].leaguePoints
-            self.summoners[5].rank = response.data[i].rank
-            self.summoners[5].tier = response.data[i].tier
-            self.summoners[5].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
+            self.redTeam[0].name = response.data[i].playerOrTeamName
+            self.redTeam[0].lp = response.data[i].leaguePoints
+            self.redTeam[0].rank = response.data[i].rank
+            self.redTeam[0].tier = response.data[i].tier
+            self.redTeam[0].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100) + '%'
           }
         }
       })
@@ -340,11 +366,11 @@ export default {
       .then(function (response) {
         for (var i = 0; i < response.data.length; i++) {
           if (response.data[i].queueType === 'RANKED_SOLO_5x5') {
-            self.summoners[6].name = response.data[i].playerOrTeamName
-            self.summoners[6].lp = response.data[i].leaguePoints
-            self.summoners[6].rank = response.data[i].rank
-            self.summoners[6].tier = response.data[i].tier
-            self.summoners[6].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
+            self.redTeam[1].name = response.data[i].playerOrTeamName
+            self.redTeam[1].lp = response.data[i].leaguePoints
+            self.redTeam[1].rank = response.data[i].rank
+            self.redTeam[1].tier = response.data[i].tier
+            self.redTeam[1].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100) + '%'
           }
         }
       })
@@ -358,11 +384,11 @@ export default {
       .then(function (response) {
         for (var i = 0; i < response.data.length; i++) {
           if (response.data[i].queueType === 'RANKED_SOLO_5x5') {
-            self.summoners[7].name = response.data[i].playerOrTeamName
-            self.summoners[7].lp = response.data[i].leaguePoints
-            self.summoners[7].rank = response.data[i].rank
-            self.summoners[7].tier = response.data[i].tier
-            self.summoners[7].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
+            self.redTeam[2].name = response.data[i].playerOrTeamName
+            self.redTeam[2].lp = response.data[i].leaguePoints
+            self.redTeam[2].rank = response.data[i].rank
+            self.redTeam[2].tier = response.data[i].tier
+            self.redTeam[2].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100) + '%'
           }
         }
       })
@@ -376,11 +402,11 @@ export default {
       .then(function (response) {
         for (var i = 0; i < response.data.length; i++) {
           if (response.data[i].queueType === 'RANKED_SOLO_5x5') {
-            self.summoners[8].name = response.data[i].playerOrTeamName
-            self.summoners[8].lp = response.data[i].leaguePoints
-            self.summoners[8].rank = response.data[i].rank
-            self.summoners[8].tier = response.data[i].tier
-            self.summoners[8].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
+            self.redTeam[3].name = response.data[i].playerOrTeamName
+            self.redTeam[3].lp = response.data[i].leaguePoints
+            self.redTeam[3].rank = response.data[i].rank
+            self.redTeam[3].tier = response.data[i].tier
+            self.redTeam[3].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100) + '%'
           }
         }
       })
@@ -394,11 +420,11 @@ export default {
       .then(function (response) {
         for (var i = 0; i < response.data.length; i++) {
           if (response.data[i].queueType === 'RANKED_SOLO_5x5') {
-            self.summoners[9].name = response.data[i].playerOrTeamName
-            self.summoners[9].lp = response.data[i].leaguePoints
-            self.summoners[9].rank = response.data[i].rank
-            self.summoners[9].tier = response.data[i].tier
-            self.summoners[9].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
+            self.redTeam[4].name = response.data[i].playerOrTeamName
+            self.redTeam[4].lp = response.data[i].leaguePoints
+            self.redTeam[4].rank = response.data[i].rank
+            self.redTeam[4].tier = response.data[i].tier
+            self.redTeam[4].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100) + '%'
           }
         }
       })
