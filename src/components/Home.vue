@@ -191,6 +191,13 @@ export default {
     },
     getCurrentGame: function () {
       var self = this
+      for (var i = 0; i < this.summoners.length; i++) {
+        this.summoners[i].name = 'Loading..'
+        this.summoners[i].lp = 'Loading..'
+        this.summoners[i].rank = 'Loading..'
+        this.summoners[i].tier = 'Loading..'
+        this.summoners[i].wr = 'Loading..'
+      }
       axios.post('../php/testing.php', {
         name: this.name,
         server: this.server
