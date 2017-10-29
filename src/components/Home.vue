@@ -28,7 +28,7 @@
               v-show="showTable"
             >
             <template slot="items" scope="props">
-              <td>{{ props.item.name }}</td>
+              <td  style="width:0.2vw">{{ props.item.name }}</td>
               <td class="text-xs-center">{{ props.item.champ }}</td>
               <td class="text-xs-center"><img v-bind:src= "props.item.tier" alt=""  style="width: 60px"></td>
               <td class="text-xs-center">{{ props.item.rank }}</td>
@@ -54,7 +54,7 @@
               v-show="showTable"
             >
             <template slot="items" scope="props">
-              <td>{{ props.item.name }}</td>
+              <td style="width:0.2vw">{{ props.item.name }}</td>
               <td class="text-xs-center">{{ props.item.champ }}</td>
               <td class="text-xs-center"><img v-bind:src= "props.item.tier" alt=""  style="width: 60px"></td>
               <td class="text-xs-center">{{ props.item.rank }}</td>
@@ -76,7 +76,7 @@ export default {
     return {
       name: null,
       server: null,
-      showTable: false,
+      showTable: true,
       summonerId: '',
       lp: '',
       rank: '',
