@@ -288,6 +288,7 @@ export default {
     },
     getCurrentGame: function () {
       var self = this
+      this.showTable = false
       for (var i = 0; i < 5; i++) {
         this.blueTeam[i].name = 'Loading..'
         this.blueTeam[i].lp = 'Loading..'
@@ -335,8 +336,8 @@ export default {
     },
     getGameStats: function () {
       var self = this
-      this.showTable = false
-      setTimeout(function () { self.showTable = true }, 300)
+
+      this.showTable = true
       axios.post('../php/leaguePos.php', {
         id: this.gameIds[0],
         server: this.server
