@@ -132,8 +132,8 @@ export default {
         })
           .then(function (response) {
             console.log(response.data)
-            for (var i = 0; i < response.participants.length; i++) {
-              self.gameIds.push(response.participants[i].summonerId)
+            for (var i = 0; i < response.data.participants.length; i++) {
+              self.gameIds.push(response.data.participants[i].summonerId)
             }
           })
           .catch(function (e) {
