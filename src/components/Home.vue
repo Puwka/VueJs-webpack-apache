@@ -94,9 +94,7 @@ export default {
       })
         .then(function (response) {
           console.log(response.data)
-          console.log(self.summonerId)
           self.summonerId = response.data.id
-          console.log(this.summonerId)
           axios.post('../php/leaguePos.php', {
             id: self.summonerId,
             server: self.server
@@ -105,10 +103,10 @@ export default {
               console.log(response.data)
               for (var i = 0; i < response.data.length; i++) {
                 if (response.data[i].queueType === 'RANKED_SOLO_5x5') {
-                  this.lp = response.data[i].leaguePoints
-                  this.rank = response.data[i].rank
-                  this.tier = response.data[i].tier
-                  this.wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
+                  self.lp = response.data[i].leaguePoints
+                  self.rank = response.data[i].rank
+                  self.tier = response.data[i].tier
+                  self.wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
                 }
               }
             })
