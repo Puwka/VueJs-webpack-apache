@@ -56,7 +56,7 @@
             <template slot="items" scope="props">
               <td>{{ props.item.name }}</td>
               <td class="text-xs-right">{{ props.item.champ }}</td>
-              <td class="text-xs-right">{{ props.item.tier}}</td>
+              <td class="text-xs-right"><img v-bind:src= "props.item.tier"  alt=""></td>
               <td class="text-xs-right">{{ props.item.rank }}</td>
               <td class="text-xs-right">{{ props.item.lp }}</td>
               <td class="text-xs-right">{{ props.item.wr }} %</td>
@@ -341,7 +341,7 @@ export default {
             self.blueTeam[0].name = response.data[i].playerOrTeamName
             self.blueTeam[0].lp = response.data[i].leaguePoints
             self.blueTeam[0].rank = response.data[i].rank
-            self.blueTeam[0].tier = '../images' + response.data[i].tier + '.png'
+            self.blueTeam[0].tier = '../images/' + response.data[i].tier + '.png'
             self.blueTeam[0].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
           }
         }
@@ -359,7 +359,7 @@ export default {
             self.blueTeam[1].name = response.data[i].playerOrTeamName
             self.blueTeam[1].lp = response.data[i].leaguePoints
             self.blueTeam[1].rank = response.data[i].rank
-            self.blueTeam[1].tier = '../images' + response.data[i].tier + '.png'
+            self.blueTeam[1].tier = '../images/' + response.data[i].tier + '.png'
             self.blueTeam[1].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
           }
         }
@@ -377,7 +377,7 @@ export default {
             self.blueTeam[2].name = response.data[i].playerOrTeamName
             self.blueTeam[2].lp = response.data[i].leaguePoints
             self.blueTeam[2].rank = response.data[i].rank
-            self.blueTeam[2].tier = '../images' + response.data[i].tier + '.png'
+            self.blueTeam[2].tier = '../images/' + response.data[i].tier + '.png'
             self.blueTeam[2].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
           }
         }
@@ -395,7 +395,7 @@ export default {
             self.blueTeam[3].name = response.data[i].playerOrTeamName
             self.blueTeam[3].lp = response.data[i].leaguePoints
             self.blueTeam[3].rank = response.data[i].rank
-            self.blueTeam[3].tier = '../images' + response.data[i].tier + '.png'
+            self.blueTeam[3].tier = '../images/' + response.data[i].tier + '.png'
             self.blueTeam[3].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
           }
         }
@@ -413,7 +413,7 @@ export default {
             self.blueTeam[4].name = response.data[i].playerOrTeamName
             self.blueTeam[4].lp = response.data[i].leaguePoints
             self.blueTeam[4].rank = response.data[i].rank
-            self.blueTeam[4].tier = '../images' + response.data[i].tier + '.png'
+            self.blueTeam[4].tier = '../images/' + response.data[i].tier + '.png'
             self.blueTeam[4].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
           }
         }
@@ -431,7 +431,7 @@ export default {
             self.redTeam[0].name = response.data[i].playerOrTeamName
             self.redTeam[0].lp = response.data[i].leaguePoints
             self.redTeam[0].rank = response.data[i].rank
-            self.redTeam[0].tier = '../images' + response.data[i].tier + '.png'
+            self.redTeam[0].tier = '../images/' + response.data[i].tier + '.png'
             self.redTeam[0].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
           }
         }
@@ -449,7 +449,7 @@ export default {
             self.redTeam[1].name = response.data[i].playerOrTeamName
             self.redTeam[1].lp = response.data[i].leaguePoints
             self.redTeam[1].rank = response.data[i].rank
-            self.redTeam[1].tier = '../images' + response.data[i].tier + '.png'
+            self.redTeam[1].tier = '../images/' + response.data[i].tier + '.png'
             self.redTeam[1].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
           }
         }
@@ -467,7 +467,7 @@ export default {
             self.redTeam[2].name = response.data[i].playerOrTeamName
             self.redTeam[2].lp = response.data[i].leaguePoints
             self.redTeam[2].rank = response.data[i].rank
-            self.redTeam[2].tier = '../images' + response.data[i].tier + '.png'
+            self.redTeam[2].tier = '../images/' + response.data[i].tier + '.png'
             self.redTeam[2].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
           }
         }
@@ -485,7 +485,7 @@ export default {
             self.redTeam[3].name = response.data[i].playerOrTeamName
             self.redTeam[3].lp = response.data[i].leaguePoints
             self.redTeam[3].rank = response.data[i].rank
-            self.redTeam[3].tier = '../images' + response.data[i].tier + '.png'
+            self.redTeam[3].tier = '../images/' + response.data[i].tier + '.png'
             self.redTeam[3].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
           }
         }
@@ -503,7 +503,7 @@ export default {
             self.redTeam[4].name = response.data[i].playerOrTeamName
             self.redTeam[4].lp = response.data[i].leaguePoints
             self.redTeam[4].rank = response.data[i].rank
-            self.redTeam[4].tier = '../images' + response.data[i].tier + '.png'
+            self.redTeam[4].tier = '../images/' + response.data[i].tier + '.png'
             self.redTeam[4].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
           }
         }
