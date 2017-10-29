@@ -122,7 +122,7 @@ export default {
           champ: '',
           lp: '',
           rank: '',
-          tier: '',
+          tier: '../src/assets/GOLD.png',
           wr: ''
         },
         {
@@ -288,13 +288,11 @@ export default {
         this.blueTeam[i].name = 'Loading..'
         this.blueTeam[i].lp = 'Loading..'
         this.blueTeam[i].rank = 'Loading..'
-        this.blueTeam[i].tier = 'Loading..'
         this.blueTeam[i].wr = 'Loading..'
         this.blueTeam[i].champ = 'Loading..'
         this.redTeam[i].name = 'Loading..'
         this.redTeam[i].lp = 'Loading..'
         this.redTeam[i].rank = 'Loading..'
-        this.redTeam[i].tier = 'Loading..'
         this.redTeam[i].wr = 'Loading..'
         this.redTeam[i].champ = 'Loading..'
       }
