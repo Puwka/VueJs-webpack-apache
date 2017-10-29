@@ -47,8 +47,8 @@
         <transition name="scale-transition">
           <template>
             <div class="team__container"  v-show="showWinrate">
-              <div class="blue blue__team__win" :style="{width: blueWin + '%'}"><span>65% chance</span></div>
-              <div class="red red__team__win" :style="{width: redWin + '%'}"><span>35% chance</span></div>
+              <div class="blue blue__team__win" :style="{width: blueWin + '%'}"><span>{{ blueWin }} % chance</span></div>
+              <div class="red red__team__win" :style="{width: redWin + '%'}"><span>{{ redWin }} % chance</span></div>
             </div>
           </template>
         </transition>
