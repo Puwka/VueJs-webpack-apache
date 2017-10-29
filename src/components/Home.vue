@@ -21,6 +21,29 @@
 		</v-flex>
 		<v-spacer></v-spacer>
   </v-layout>
+  <v-layout row wrap>
+    <v-spacer></v-spacer>
+    <v-flex xs10>
+      <template>
+  <v-data-table
+      v-bind:headers="headers"
+      :items="blueTeam"
+      hide-actions
+      class="elevation-1"
+    >
+    <template slot="blueTeam" scope="props">
+      <td>{{ blueTeam.item.name }}</td>
+      <td class="text-xs-right">{{ blueTeam.item.champ }}</td>
+      <td class="text-xs-right">{{ blueTeam.item.tier}}</td>
+      <td class="text-xs-right">{{ blueTeam.item.rank }}</td>
+      <td class="text-xs-right">{{ blueTeam.item.lp }}</td>
+      <td class="text-xs-right">{{ blueTeam.item.wr }}</td>
+    </template>
+  </v-data-table>
+</template>
+    </v-flex>
+    <v-spacer></v-spacer>
+  </v-layout>
 </v-container>
 </template>
 <script>
@@ -35,6 +58,39 @@ export default {
       rank: '',
       wr: '',
       tier: '',
+      headers: [
+        {
+          text: 'Summoner Name',
+          align: 'left',
+          sortable: false,
+          value: 'name'
+        },
+        {
+          text: 'Champion',
+          sortable: false,
+          value: 'champ'
+        },
+        {
+          text: 'League',
+          sortable: false,
+          value: 'tier'
+        },
+        {
+          text: 'Division',
+          sortable: false,
+          value: 'rank'
+        },
+        {
+          text: 'League Points',
+          sortable: false,
+          value: 'lp'
+        },
+        {
+          text: 'Win Rate',
+          sortable: false,
+          value: 'wr'
+        }
+      ],
       gameIds: [],
       blueTeam: [
         {
@@ -258,11 +314,11 @@ export default {
       .then(function (response) {
         for (var i = 0; i < response.data.length; i++) {
           if (response.data[i].queueType === 'RANKED_SOLO_5x5') {
-            self.blueTEam[0].name = response.data[i].playerOrTeamName
-            self.blueTEam[0].lp = response.data[i].leaguePoints
-            self.blueTEam[0].rank = response.data[i].rank
-            self.blueTEam[0].tier = response.data[i].tier
-            self.blueTEam[0].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100) + '%'
+            self.blueTeam[0].name = response.data[i].playerOrTeamName
+            self.blueTeam[0].lp = response.data[i].leaguePoints
+            self.blueTeam[0].rank = response.data[i].rank
+            self.blueTeam[0].tier = response.data[i].tier
+            self.blueTeam[0].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100) + '%'
           }
         }
       })
