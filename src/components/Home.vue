@@ -47,8 +47,8 @@
         <transition name="scale-transition">
           <template>
             <div class="team__container"  v-show="showWinrate">
-              <div class="blue blue__team__win" :style="{width: blueWin}"><span>65% chance</span></div>
-              <div class="red red__team__win" :style="{width: redWin}"><span>35% chance</span></div>
+              <div class="blue blue__team__win" :style="{width: blueWin + '%'}"><span>65% chance</span></div>
+              <div class="red red__team__win" :style="{width: redWin + '%'}"><span>35% chance</span></div>
             </div>
           </template>
         </transition>
@@ -355,7 +355,6 @@ export default {
     },
     getGameStats: function () {
       var self = this
-
       this.showTable = true
       axios.post('../php/leaguePos.php', {
         id: this.gameIds[0],
@@ -531,13 +530,13 @@ export default {
             self.redTeam[4].rank = response.data[i].rank
             self.redTeam[4].tier = '/src/assets/' + response.data[i].tier + '.png'
             self.redTeam[4].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
+            self.calculateWinChance()
           }
         }
       })
       .catch(function (e) {
         console.log(e)
       })
-      this.calculateWinChance()
     },
     calculateWinChance: function () {
       var blueWr = 0
@@ -561,7 +560,6 @@ export default {
   }
 }
 </script>
-
 <style lang="css">
 .team__container {
   position: relative;
