@@ -30,10 +30,10 @@
             <template slot="items" scope="props">
               <td>{{ props.item.name }}</td>
               <td class="text-xs-right">{{ props.item.champ }}</td>
-              <td class="text-xs-right"><img v-bind:src= "props.item.tier"  alt=""></td>
+              <td class="text-xs-right"><img v-bind:src= "props.item.tier" alt=""></td>
               <td class="text-xs-right">{{ props.item.rank }}</td>
               <td class="text-xs-right">{{ props.item.lp }}</td>
-              <td class="text-xs-right">{{ props.item.wr }}</td>
+              <td class="text-xs-right">{{ props.item.wr }} %</td>
             </template>
           </v-data-table>
         </transition>
@@ -56,7 +56,7 @@
             <template slot="items" scope="props">
               <td>{{ props.item.name }}</td>
               <td class="text-xs-right">{{ props.item.champ }}</td>
-              <td class="text-xs-right"><img v-bind:src= "props.item.tier"  alt=""></td>
+              <td class="text-xs-right"><img v-bind:src= "props.item.tier" alt=""></td>
               <td class="text-xs-right">{{ props.item.rank }}</td>
               <td class="text-xs-right">{{ props.item.lp }}</td>
               <td class="text-xs-right">{{ props.item.wr }} %</td>
