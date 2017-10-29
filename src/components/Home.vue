@@ -42,6 +42,20 @@
     <v-spacer></v-spacer>
     </v-layout>
     <v-layout row wrap>
+      <v-spacer></v-spacer>
+      <v-flex xs10>
+        <transition name="scale-transition">
+          <template>
+            <div class="team__container"  v-show="showWinrate">
+              <div class="blue blue__team__win" :style="{width: blueWin}"><span>65% chance</span></div>
+              <div class="red red__team__win" :style="{width: redWin}"><span>35% chance</span></div>
+            </div>
+          </template>
+        </transition>
+      </v-flex>
+      <v-spacer></v-spacer>
+    </v-layout>
+    <v-layout row wrap>
     <v-spacer></v-spacer>
     <v-flex xs10>
       <template>
@@ -77,7 +91,10 @@ export default {
       name: null,
       server: null,
       showTable: false,
+      showWinrate: false,
       summonerId: '',
+      blueWin: 0,
+      redWin: 0,
       lp: '',
       rank: '',
       wr: '',
@@ -290,6 +307,7 @@ export default {
       var self = this
       this.gameIds = []
       this.showTable = false
+      this.showWinrate = false
       for (var i = 0; i < 5; i++) {
         this.blueTeam[i].name = 'Loading..'
         this.blueTeam[i].lp = 'Loading..'
@@ -519,7 +537,61 @@ export default {
       .catch(function (e) {
         console.log(e)
       })
+      this.calculateWinChance()
+    },
+    calculateWinChance: function () {
+      var blueWr = 0
+      var redWr = 0
+      var total = 0
+      var redChance
+      var blueChance = 0
+      for (var i = 0; i < 5; i++) {
+        blueWr += this.blueTeam[i].wr
+      }
+      for (var j = 0; j < 5; j++) {
+        redWr += this.redTeam[j].wr
+      }
+      total = blueWr + redWr
+      blueChance = Math.round((blueWr / total) * 100)
+      redChance = 100 - blueChance
+      this.blueWin = blueChance
+      this.redWin = redChance
+      this.showWinrate = true
     }
   }
 }
 </script>
+
+<style lang="css">
+.team__container {
+  position: relative;
+  height: 50px;
+  color: white;
+}
+.blue__team__win {
+  width: 65%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  height: 50px;
+  background-color: blue;
+}
+.red__team__win {
+  width: 35%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 0;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  height: 50px;
+  background-color: red;
+}
+</style>
