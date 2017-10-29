@@ -95,14 +95,12 @@ export default {
         server: this.server
       })
         .then(function (response) {
-          console.log(response.data)
           self.summonerId = response.data.id
           axios.post('../php/leaguePos.php', {
             id: self.summonerId,
             server: self.server
           })
             .then(function (response) {
-              console.log(response.data)
               for (var i = 0; i < response.data.length; i++) {
                 if (response.data[i].queueType === 'RANKED_SOLO_5x5') {
                   self.lp = response.data[i].leaguePoints
@@ -122,7 +120,7 @@ export default {
     },
     getCurrentGame: function () {
       var self = this
-      axios.post('../php/testing/php', {
+      axios.post('../php/testing.php', {
         name: this.name,
         server: this.server
       })
