@@ -5,7 +5,7 @@
     <v-flex xs6 sm8>
       <v-form>
         <v-text-field label="Summoner Name" v-model="name" required></v-text-field>
-				<br>{{ summoners }}
+				<div v-for="summoner in summoners">{{summoner}}</div>
         <br>League: {{ tier }}
         <br>Division: {{ rank }}
         <br>League points: {{ lp }}
