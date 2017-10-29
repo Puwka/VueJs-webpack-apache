@@ -5,12 +5,6 @@
     <v-flex xs6 sm8>
       <v-form>
         <v-text-field label="Summoner Name" v-model="name" required></v-text-field>
-				<div v-for="summoner in blueTeam">{{summoner}}</div>
-				<div v-for="summoner in redTeam">{{summoner}}</div>
-        <br>League: {{ tier }}
-        <br>Division: {{ rank }}
-        <br>League points: {{ lp }}
-				<br>Win Rate: {{ wr }}
       </v-form>
     </v-flex>
     <v-flex xs3 sm2 lg1>
@@ -25,22 +19,41 @@
     <v-spacer></v-spacer>
     <v-flex xs10>
       <template>
-  <v-data-table
-      v-bind:headers="headers"
-      :items="blueTeam"
-      hide-actions
-      class="elevation-1"
-    >
-    <template slot="blueTeam" scope="props">
-      <td>{{ props.item.name }}</td>
-      <td class="text-xs-right">{{ props.item.champ }}</td>
-      <td class="text-xs-right">{{ props.item.tier}}</td>
-      <td class="text-xs-right">{{ props.item.rank }}</td>
-      <td class="text-xs-right">{{ props.item.lp }}</td>
-      <td class="text-xs-right">{{ props.item.wr }}</td>
-    </template>
-  </v-data-table>
-</template>
+        <v-data-table
+            v-bind:headers="headers"
+            :items="blueTeam"
+            hide-actions
+            class="elevation-1"
+          >
+          <template slot="items" scope="props">
+            <td>{{ props.item.name }}</td>
+            <td class="text-xs-right">{{ props.item.champ }}</td>
+            <td class="text-xs-right">{{ props.item.tier}}</td>
+            <td class="text-xs-right">{{ props.item.rank }}</td>
+            <td class="text-xs-right">{{ props.item.lp }}</td>
+            <td class="text-xs-right">{{ props.item.wr }}</td>
+          </template>
+        </v-data-table>
+      </template>
+    </v-flex>
+    <v-flex xs10>
+      <template>
+        <v-data-table
+            v-bind:headers="headers"
+            :items="redTeam"
+            hide-actions
+            class="elevation-1"
+          >
+          <template slot="items" scope="props">
+            <td>{{ props.item.name }}</td>
+            <td class="text-xs-right">{{ props.item.champ }}</td>
+            <td class="text-xs-right">{{ props.item.tier}}</td>
+            <td class="text-xs-right">{{ props.item.rank }}</td>
+            <td class="text-xs-right">{{ props.item.lp }}</td>
+            <td class="text-xs-right">{{ props.item.wr }}</td>
+          </template>
+        </v-data-table>
+      </template>
     </v-flex>
     <v-spacer></v-spacer>
   </v-layout>
