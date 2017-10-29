@@ -288,6 +288,7 @@ export default {
     },
     getCurrentGame: function () {
       var self = this
+      this.gameIds = []
       this.showTable = false
       for (var i = 0; i < 5; i++) {
         this.blueTeam[i].name = 'Loading..'
