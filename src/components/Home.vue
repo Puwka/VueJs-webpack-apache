@@ -32,12 +32,12 @@
       class="elevation-1"
     >
     <template slot="blueTeam" scope="props">
-      <td>{{ blueTeam.item.name }}</td>
-      <td class="text-xs-right">{{ blueTeam.item.champ }}</td>
-      <td class="text-xs-right">{{ blueTeam.item.tier}}</td>
-      <td class="text-xs-right">{{ blueTeam.item.rank }}</td>
-      <td class="text-xs-right">{{ blueTeam.item.lp }}</td>
-      <td class="text-xs-right">{{ blueTeam.item.wr }}</td>
+      <td>{{ props.item.name }}</td>
+      <td class="text-xs-right">{{ props.item.champ }}</td>
+      <td class="text-xs-right">{{ props.item.tier}}</td>
+      <td class="text-xs-right">{{ props.item.rank }}</td>
+      <td class="text-xs-right">{{ props.item.lp }}</td>
+      <td class="text-xs-right">{{ props.item.wr }}</td>
     </template>
   </v-data-table>
 </template>
