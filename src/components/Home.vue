@@ -5,7 +5,7 @@
     <v-flex xs6 sm8>
       <v-form>
         <v-text-field label="Summoner Name" v-model="name" required></v-text-field>
-				<br>{{ gameIds }}
+				<br>{{ summoners }}
         <br>League: {{ tier }}
         <br>Division: {{ rank }}
         <br>League points: {{ lp }}
@@ -35,7 +35,18 @@ export default {
       wr: '',
       tier: '',
       gameIds: [],
-      summoners: [],
+      summoners: [
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {}
+      ],
       items: [{
         text: 'EUW',
         value: 'euw1'
@@ -135,10 +146,193 @@ export default {
             for (var i = 0; i < response.data.participants.length; i++) {
               self.gameIds.push(response.data.participants[i].summonerId)
             }
+            this.getGameStats()
           })
           .catch(function (e) {
             console.log(e)
           })
+      })
+      .catch(function (e) {
+        console.log(e)
+      })
+    },
+    getGameStats: function () {
+      axios.post('../php/leaguePos.php', {
+        id: this.gameIds[0],
+        server: this.server
+      })
+      .then(function (response) {
+        for (var i = 0; i < response.data.length; i++) {
+          if (response.data[i].queueType === 'RANKED_SOLO_5x5') {
+            self.summoners[0].name = response.data[i].playerOrTeamName
+            self.summoners[0].lp = response.data[i].leaguePoints
+            self.summoners[0].rank = response.data[i].rank
+            self.summoners[0].tier = response.data[i].tier
+            self.summoners[0].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
+          }
+        }
+      })
+      .catch(function (e) {
+        console.log(e)
+      })
+      axios.post('../php/leaguePos.php', {
+        id: this.gameIds[1],
+        server: this.server
+      })
+      .then(function (response) {
+        for (var i = 0; i < response.data.length; i++) {
+          if (response.data[i].queueType === 'RANKED_SOLO_5x5') {
+            self.summoners[1].name = response.data[i].playerOrTeamName
+            self.summoners[1].lp = response.data[i].leaguePoints
+            self.summoners[1].rank = response.data[i].rank
+            self.summoners[1].tier = response.data[i].tier
+            self.summoners[1].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
+          }
+        }
+      })
+      .catch(function (e) {
+        console.log(e)
+      })
+      axios.post('../php/leaguePos.php', {
+        id: this.gameIds[2],
+        server: this.server
+      })
+      .then(function (response) {
+        for (var i = 0; i < response.data.length; i++) {
+          if (response.data[i].queueType === 'RANKED_SOLO_5x5') {
+            self.summoners[2].name = response.data[i].playerOrTeamName
+            self.summoners[2].lp = response.data[i].leaguePoints
+            self.summoners[2].rank = response.data[i].rank
+            self.summoners[2].tier = response.data[i].tier
+            self.summoners[2].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
+          }
+        }
+      })
+      .catch(function (e) {
+        console.log(e)
+      })
+      axios.post('../php/leaguePos.php', {
+        id: this.gameIds[3],
+        server: this.server
+      })
+      .then(function (response) {
+        for (var i = 0; i < response.data.length; i++) {
+          if (response.data[i].queueType === 'RANKED_SOLO_5x5') {
+            self.summoners[3].name = response.data[i].playerOrTeamName
+            self.summoners[3].lp = response.data[i].leaguePoints
+            self.summoners[3].rank = response.data[i].rank
+            self.summoners[3].tier = response.data[i].tier
+            self.summoners[3].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
+          }
+        }
+      })
+      .catch(function (e) {
+        console.log(e)
+      })
+      axios.post('../php/leaguePos.php', {
+        id: this.gameIds[4],
+        server: this.server
+      })
+      .then(function (response) {
+        for (var i = 0; i < response.data.length; i++) {
+          if (response.data[i].queueType === 'RANKED_SOLO_5x5') {
+            self.summoners[4].name = response.data[i].playerOrTeamName
+            self.summoners[4].lp = response.data[i].leaguePoints
+            self.summoners[4].rank = response.data[i].rank
+            self.summoners[4].tier = response.data[i].tier
+            self.summoners[4].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
+          }
+        }
+      })
+      .catch(function (e) {
+        console.log(e)
+      })
+      axios.post('../php/leaguePos.php', {
+        id: this.gameIds[5],
+        server: this.server
+      })
+      .then(function (response) {
+        for (var i = 0; i < response.data.length; i++) {
+          if (response.data[i].queueType === 'RANKED_SOLO_5x5') {
+            self.summoners[5].name = response.data[i].playerOrTeamName
+            self.summoners[5].lp = response.data[i].leaguePoints
+            self.summoners[5].rank = response.data[i].rank
+            self.summoners[5].tier = response.data[i].tier
+            self.summoners[5].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
+          }
+        }
+      })
+      .catch(function (e) {
+        console.log(e)
+      })
+      axios.post('../php/leaguePos.php', {
+        id: this.gameIds[6],
+        server: this.server
+      })
+      .then(function (response) {
+        for (var i = 0; i < response.data.length; i++) {
+          if (response.data[i].queueType === 'RANKED_SOLO_5x5') {
+            self.summoners[6].name = response.data[i].playerOrTeamName
+            self.summoners[6].lp = response.data[i].leaguePoints
+            self.summoners[6].rank = response.data[i].rank
+            self.summoners[6].tier = response.data[i].tier
+            self.summoners[6].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
+          }
+        }
+      })
+      .catch(function (e) {
+        console.log(e)
+      })
+      axios.post('../php/leaguePos.php', {
+        id: this.gameIds[7],
+        server: this.server
+      })
+      .then(function (response) {
+        for (var i = 0; i < response.data.length; i++) {
+          if (response.data[i].queueType === 'RANKED_SOLO_5x5') {
+            self.summoners[7].name = response.data[i].playerOrTeamName
+            self.summoners[7].lp = response.data[i].leaguePoints
+            self.summoners[7].rank = response.data[i].rank
+            self.summoners[7].tier = response.data[i].tier
+            self.summoners[7].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
+          }
+        }
+      })
+      .catch(function (e) {
+        console.log(e)
+      })
+      axios.post('../php/leaguePos.php', {
+        id: this.gameIds[8],
+        server: this.server
+      })
+      .then(function (response) {
+        for (var i = 0; i < response.data.length; i++) {
+          if (response.data[i].queueType === 'RANKED_SOLO_5x5') {
+            self.summoners[8].name = response.data[i].playerOrTeamName
+            self.summoners[8].lp = response.data[i].leaguePoints
+            self.summoners[8].rank = response.data[i].rank
+            self.summoners[8].tier = response.data[i].tier
+            self.summoners[8].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
+          }
+        }
+      })
+      .catch(function (e) {
+        console.log(e)
+      })
+      axios.post('../php/leaguePos.php', {
+        id: this.gameIds[9],
+        server: this.server
+      })
+      .then(function (response) {
+        for (var i = 0; i < response.data.length; i++) {
+          if (response.data[i].queueType === 'RANKED_SOLO_5x5') {
+            self.summoners[9].name = response.data[i].playerOrTeamName
+            self.summoners[9].lp = response.data[i].leaguePoints
+            self.summoners[9].rank = response.data[i].rank
+            self.summoners[9].tier = response.data[i].tier
+            self.summoners[9].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
+          }
+        }
       })
       .catch(function (e) {
         console.log(e)
