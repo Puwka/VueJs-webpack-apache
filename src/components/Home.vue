@@ -11,7 +11,7 @@
       <v-select v-bind:items="items" v-model="server" label="Server" single-line bottom></v-select>
     </v-flex>
 		<v-flex xs3 sm2 lg1>
-			<v-btn  left large class="primary" dark @click.stop="getCurrentGame(), showTable=!showTable">GO!</v-btn>
+			<v-btn  left large class="primary" dark @click.stop="getCurrentGame()">GO!</v-btn>
 		</v-flex>
 		<v-spacer></v-spacer>
   </v-layout>
@@ -29,10 +29,10 @@
             >
             <template slot="items" scope="props">
               <td>{{ props.item.name }}</td>
-              <td class="text-xs-right">{{ props.item.champ }}</td>
-              <td class="text-xs-right"><img v-bind:src= "props.item.tier" alt=""  style="width: 60px"></td>
-              <td class="text-xs-right">{{ props.item.rank }}</td>
-              <td class="text-xs-right">{{ props.item.lp }}</td>
+              <td class="text-xs-center">{{ props.item.champ }}</td>
+              <td class="text-xs-center"><img v-bind:src= "props.item.tier" alt=""  style="width: 60px"></td>
+              <td class="text-xs-center">{{ props.item.rank }}</td>
+              <td class="text-xs-center">{{ props.item.lp }}</td>
               <td class="text-xs-right">{{ props.item.wr }} %</td>
             </template>
           </v-data-table>
@@ -55,10 +55,10 @@
             >
             <template slot="items" scope="props">
               <td>{{ props.item.name }}</td>
-              <td class="text-xs-right">{{ props.item.champ }}</td>
-              <td class="text-xs-right"><img v-bind:src= "props.item.tier" alt=""  style="width: 60px"></td>
-              <td class="text-xs-right">{{ props.item.rank }}</td>
-              <td class="text-xs-right">{{ props.item.lp }}</td>
+              <td class="text-xs-center">{{ props.item.champ }}</td>
+              <td class="text-xs-center"><img v-bind:src= "props.item.tier" alt=""  style="width: 60px"></td>
+              <td class="text-xs-center">{{ props.item.rank }}</td>
+              <td class="text-xs-center">{{ props.item.lp }}</td>
               <td class="text-xs-right">{{ props.item.wr }} %</td>
             </template>
           </v-data-table>
@@ -91,21 +91,25 @@ export default {
         },
         {
           text: 'Champion',
+          align: 'center',
           sortable: false,
           value: 'champ'
         },
         {
           text: 'League',
+          align: 'center',
           sortable: false,
           value: 'tier'
         },
         {
           text: 'Division',
+          align: 'center',
           sortable: false,
           value: 'rank'
         },
         {
           text: 'League Points',
+          align: 'center',
           sortable: false,
           value: 'lp'
         },
@@ -289,10 +293,12 @@ export default {
         this.blueTeam[i].lp = 'Loading..'
         this.blueTeam[i].rank = 'Loading..'
         this.blueTeam[i].wr = 'Loading..'
+        this.blueTeam[i].tier = 'Loading..'
         this.blueTeam[i].champ = 'Loading..'
         this.redTeam[i].name = 'Loading..'
         this.redTeam[i].lp = 'Loading..'
         this.redTeam[i].rank = 'Loading..'
+        this.redTeam[i].tier = 'Loading..'
         this.redTeam[i].wr = 'Loading..'
         this.redTeam[i].champ = 'Loading..'
       }
@@ -329,6 +335,8 @@ export default {
     },
     getGameStats: function () {
       var self = this
+      this.showTable = false
+      setTimeout(function () { self.showTable = true }, 300)
       axios.post('../php/leaguePos.php', {
         id: this.gameIds[0],
         server: this.server
