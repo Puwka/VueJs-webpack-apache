@@ -36,16 +36,76 @@ export default {
       tier: '',
       gameIds: [],
       summoners: [
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {}
+        {
+          name: '',
+          lp: '',
+          rank: '',
+          tier: '',
+          wr: ''
+        },
+        {
+          name: '',
+          lp: '',
+          rank: '',
+          tier: '',
+          wr: ''
+        },
+        {
+          name: '',
+          lp: '',
+          rank: '',
+          tier: '',
+          wr: ''
+        },
+        {
+          name: '',
+          lp: '',
+          rank: '',
+          tier: '',
+          wr: ''
+        },
+        {
+          name: '',
+          lp: '',
+          rank: '',
+          tier: '',
+          wr: ''
+        },
+        {
+          name: '',
+          lp: '',
+          rank: '',
+          tier: '',
+          wr: ''
+        },
+        {
+          name: '',
+          lp: '',
+          rank: '',
+          tier: '',
+          wr: ''
+        },
+        {
+          name: '',
+          lp: '',
+          rank: '',
+          tier: '',
+          wr: ''
+        },
+        {
+          name: '',
+          lp: '',
+          rank: '',
+          tier: '',
+          wr: ''
+        },
+        {
+          name: '',
+          lp: '',
+          rank: '',
+          tier: '',
+          wr: ''
+        }
       ],
       items: [{
         text: 'EUW',
