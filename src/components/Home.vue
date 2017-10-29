@@ -81,50 +81,43 @@ export default {
     }
   },
   methods: {
-    doSmth: function () {
-      console.log('hi')
-      axios.post('../php/testing.php', {
-        name: this.name,
-        server: this.server
-      })
-        .then(response => {
-          console.log(response.data.name)
-          this.summonerId = response.data.id
-        })
-        .catch(e => {
-          console.log(e)
-        })
-    },
     getLeaguePos: function () {
-      this.doSmth()
-      var self = this
       this.lp = 'Loading...'
       this.rank = 'Loading...'
       this.tier = 'Loading...'
       this.wr = 'Loading...'
-      setTimeout(function () {
-        axios.post('../php/leaguePos.php', {
-          id: self.summonerId,
-          server: self.server
-        })
-          .then(response => {
-            console.log(response.data)
-            for (var i = 0; i < response.data.length; i++) {
-              if (response.data[i].queueType === 'RANKED_SOLO_5x5') {
-                self.lp = response.data[i].leaguePoints
-                self.rank = response.data[i].rank
-                self.tier = response.data[i].tier
-                self.wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
+      axios.post('../php/testing.php', {
+        name: this.name,
+        server: this.server
+      })
+        .then(function (response) {
+          console.log(response.data.name)
+          this.summonerId = response.data.id
+          axios.post('../php/leaguePos.php', {
+            id: this.summonerId,
+            server: this.server
+          })
+            .then(function (response) {
+              console.log(response.data)
+              for (var i = 0; i < response.data.length; i++) {
+                if (response.data[i].queueType === 'RANKED_SOLO_5x5') {
+                  this.lp = response.data[i].leaguePoints
+                  this.rank = response.data[i].rank
+                  this.tier = response.data[i].tier
+                  this.wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
+                }
               }
-            }
-          })
-          .catch(e => {
-            console.log(e)
-          })
-      }, 500)
+            })
+            .catch(function (e) {
+              console.log(e)
+            })
+        })
+
+        .catch(e => {
+          console.log(e)
+        })
     },
     getCurrentGame: function () {
-      this.doSmth()
       axios.post('../php/current.php', {
         id: this.summonerId,
         server: this.server
