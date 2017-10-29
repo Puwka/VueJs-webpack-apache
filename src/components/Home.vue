@@ -36,6 +36,10 @@
         </v-data-table>
       </template>
     </v-flex>
+    <v-spacer></v-spacer>
+    </v-layout>
+    <v-layout row wrap>
+    <v-spacer></v-spacer>
     <v-flex xs10>
       <template>
         <v-data-table
