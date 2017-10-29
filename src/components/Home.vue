@@ -5,6 +5,7 @@
     <v-flex xs6 sm8>
       <v-form>
         <v-text-field label="Summoner Name" v-model="name" required></v-text-field>
+				<br>{{ summonerId }}
         <br>League: {{ tier }}
         <br>Division: {{ rank }}
         <br>League points: {{ lp }}
@@ -97,8 +98,8 @@ export default {
           self.summonerId = response.data.id
           console.log(this.summonerId)
           axios.post('../php/leaguePos.php', {
-            id: this.summonerId,
-            server: this.server
+            id: self.summonerId,
+            server: self.server
           })
             .then(function (response) {
               console.log(response.data)
