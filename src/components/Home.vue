@@ -27,6 +27,16 @@
               class="elevation-1"
               v-show="showTable"
             >
+            <template slot="headers" scope="props">
+              <tr class="blue">
+                <th v-for="header in props.headers" :key="header.text"
+                :class="['column', header.align]"
+                style="color: #fff"
+                >
+                {{ header.text }}
+              </th>
+              </tr>
+            </template>
             <template slot="items" scope="props">
               <td  style="width:16.6666%">{{ props.item.name }}</td>
               <td class="text-xs-center" style="width:16.6666%">{{ props.item.champ }}</td>
@@ -67,6 +77,16 @@
               class="elevation-1"
               v-show="showTable"
             >
+            <template slot="headers" scope="props" >
+              <tr class="red">
+                <th v-for="header in props.headers" :key="header.text"
+                :class="['column', header.align]"
+                style="color: #fff"
+                >
+                {{ header.text }}
+              </th>
+              </tr>
+            </template>
             <template slot="items" scope="props">
               <td style="width:16.6666%">{{ props.item.name }}</td>
               <td class="text-xs-center" style="width:16.6666%">{{ props.item.champ }}</td>
@@ -90,7 +110,7 @@ export default {
     return {
       name: null,
       server: null,
-      showTable: false,
+      showTable: true,
       showWinrate: false,
       summonerId: '',
       blueWin: 0,
@@ -102,36 +122,37 @@ export default {
       headers: [
         {
           text: 'Summoner Name',
-          align: 'left',
+          align: 'text-xs-left',
           sortable: false,
           value: 'name'
         },
         {
           text: 'Champion',
-          align: 'center',
+          align: 'text-xs-center',
           sortable: false,
           value: 'champ'
         },
         {
           text: 'League',
-          align: 'center',
+          align: 'text-xs-center',
           sortable: false,
           value: 'tier'
         },
         {
           text: 'Division',
-          align: 'center',
+          align: 'text-xs-center',
           sortable: false,
           value: 'rank'
         },
         {
           text: 'League Points',
-          align: 'center',
+          align: 'text-xs-center',
           sortable: false,
           value: 'lp'
         },
         {
           text: 'Win Rate',
+          align: 'text-xs-right',
           sortable: false,
           value: 'wr'
         }
@@ -530,15 +551,17 @@ export default {
             self.redTeam[4].rank = response.data[i].rank
             self.redTeam[4].tier = '/src/assets/' + response.data[i].tier + '.png'
             self.redTeam[4].wr = Math.round((response.data[i].wins / (response.data[i].wins + response.data[i].losses)) * 100)
-            self.calculateWinChance()
           }
         }
+        self.calculateWinChance()
       })
       .catch(function (e) {
         console.log(e)
       })
     },
     calculateWinChance: function () {
+      this.blueWin = 0
+      this.redWin = 0
       var blueWr = 0
       var redWr = 0
       var total = 0
