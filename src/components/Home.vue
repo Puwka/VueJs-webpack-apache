@@ -110,7 +110,7 @@ export default {
     return {
       name: null,
       server: null,
-      showTable: true,
+      showTable: false,
       showWinrate: false,
       summonerId: '',
       blueWin: 0,
@@ -588,6 +588,8 @@ export default {
   position: relative;
   height: 50px;
   color: white;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .blue__team__win {
   width: 65%;
